@@ -17,7 +17,7 @@ data "azuread_users" "owners" {
 }
 
 # Create the application
-resource "azuread_application" "main" {
+resource "azurerm_azuread_application" "main" {
   for_each = var.service_principals
 
   display_name = each.key
@@ -31,7 +31,7 @@ resource "azuread_application" "main" {
 }
 
 # Create the service principal
-resource "azuread_service_principal" "main" {
+resource "azurerm_azuread_service_principal" "main" {
   for_each = var.service_principals
 
   application_id = azuread_application.main[each.key].application_id
